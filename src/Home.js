@@ -31,6 +31,8 @@ function Fatura() {
       <div className="Logout">
         <button onClick={logout}>Logout</button>
       </div>
+
+      
       <div className="Menu">
         <div className="nome"></div>
         <div className="nome"></div>
