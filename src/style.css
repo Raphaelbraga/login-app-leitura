@@ -62,3 +62,12 @@ button {
     border-color: rgb(180, 19, 244, 0.1);
     outline: none;  
 }
+.TelaInicial {
+    height: 100vh;
+    background: rgba(66, 130, 115, 0.27);
+    background: linear-gradient(180deg, rgba(66,125,110,1) 5%, 
+        rgba(67,130,115,0.02) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -28,19 +28,19 @@ function Cadastro() {
     alert(localStorage.getItem(chave))
   }
 
-  const apagar =(chave) => {
+  const apagar = (chave) => {
     localStorage.removeItem(chave)
   }
-  const salvar = ()=> {
+  const salvar = () => {
     const usuario = {
       nome,
       email,
       senha,
     };
-    armazenar("dados_de_acesso",usuario);
+    armazenar("dados_de_acesso", usuario);
   }
 
-  const consultar =() =>{
+  const consultar = () => {
     consulta("dados_de_acesso");
   }
 
@@ -51,19 +51,46 @@ function Cadastro() {
 
   return (
     <div className="TelaInicial">
-      <div className="Logout">
-        <button onClick={logout}>Logout</button>
-      </div>
+      <h3> Tela cadastro de usuários</h3>
 
-      
-      <div className="Menu">
-        <div className="nome"></div>
-        <div className="nome"></div>
-        <div className="nome"></div>
+      <div className="Fomulario">
+
+        <div>
+          <input className="nome"
+            placeholder="nome"
+            name="nome"
+            value={nome}
+            onChange={(event) => setNome(event.target.value)}
+          />
+        </div>
+
+        <div>
+        <input className="email"
+            placeholder="email"
+            name="email"
+            value={email}
+            onChange={(event) => setemail(event.target.value)}
+          />
+        </div>
+
+
+        <div>
+          <input className="senha"
+            placeholder="senha"
+            name="senha"
+            value={senha}
+            onChange={(event) => setSenha(event.target.value)}
+          />
+        </div>
       </div>
 
       <button onClick={salvar}>salvar</button>
+      
       <button onClick={consultar}>consultar</button>
+
+      <div className="Logout">
+        <button onClick={logout}>Logout</button>
+      </div>
     </div>
   );
 
