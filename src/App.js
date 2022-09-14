@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { getDefaultNormalizer } from "@testing-library/react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./Home";
+import { consultar } from "./storage";
 import "./style.css"
 
 function App() {
@@ -14,18 +16,24 @@ function App() {
 
 function Login() {
   const navigate = useNavigate();
-
-  const adminUser = {
+  const [todosUsuarios, setTodosUsuarios] = useState([{
     email: "admin@admin.com",
     senha: "admin"
-  }
+  }])
+
+  useEffect(() => {
+    const dados = consultar();
+    setTodosUsuarios((current) => [...current, ...dados]);
+  }, []);
 
   const [nome, setNome] = useState("");
   const [email, setemail] = useState("");
   const [senha, setSenha] = useState("");
 
   const logar = () => {
-    if (email === adminUser.email && senha === adminUser.senha) {
+    const validar = !!todosUsuarios.filter((item) => item.email === email && item.senha === senha).length;
+
+    if (validar) {
       alert("usuario logado com sucesso");
       navigate("/home");
     } else {

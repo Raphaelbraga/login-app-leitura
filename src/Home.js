@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { consultar, armazenar } from "./storage";
 import App from "./App";
 import "./style.css"
 
 function Home() {
-
   return (
     <Routes>
       <Route path="/" exact element={<Cadastro />} />
@@ -16,37 +16,35 @@ function Home() {
 function Cadastro() {
   const navigate = useNavigate();
 
+  const [cadastrados, setCadastrados] = useState([]);
+
   const [nome, setNome] = useState("");
   const [email, setemail] = useState("");
   const [senha, setSenha] = useState("");
-  const [tipo, setTipo] = useState("");
 
-  const armazenar = (chave, valor) => {
-    localStorage.setItem(chave, JSON.stringify(valor))
-  }
-  const consulta = (chave) => {
-    alert(localStorage.getItem(chave))
+  useEffect(() => {
+    const retorno = consultar();
+    setCadastrados(retorno);
+  }, []);
+
+  const logout = () => {
+    // ativar component alert para confirmação depois sair
+    navigate("/");
   }
 
-  const apagar = (chave) => {
-    localStorage.removeItem(chave)
-  }
-  const salvar = () => {
+  const onSalvar = () => {
     const usuario = {
       nome,
       email,
       senha,
     };
-    armazenar("dados_de_acesso", usuario);
-  }
+    
+    // salva
+    armazenar([...cadastrados, usuario]);
 
-  const consultar = () => {
-    consulta("dados_de_acesso");
-  }
-
-  const logout = () => {
-    // ativar component alert para confirmação depois sair
-    navigate("/");
+    // busca
+    const retorno = consultar();
+    setCadastrados(retorno);
   }
 
   return (
@@ -54,7 +52,6 @@ function Cadastro() {
       <h3> Tela cadastro de usuários</h3>
 
       <div className="Fomulario">
-
         <div>
           <input className="nome"
             placeholder="nome"
@@ -65,14 +62,13 @@ function Cadastro() {
         </div>
 
         <div>
-        <input className="email"
-            placeholder="email"
-            name="email"
-            value={email}
-            onChange={(event) => setemail(event.target.value)}
-          />
+          <input className="email"
+              placeholder="email"
+              name="email"
+              value={email}
+              onChange={(event) => setemail(event.target.value)}
+            />
         </div>
-
 
         <div>
           <input className="senha"
@@ -84,12 +80,39 @@ function Cadastro() {
         </div>
       </div>
 
-      <button onClick={salvar}>salvar</button>
-      
-      <button onClick={consultar}>consultar</button>
+      <button onClick={onSalvar}>salvar</button>
 
       <div className="Logout">
         <button onClick={logout}>Logout</button>
+      </div>
+
+      <div>
+        <p>Cadastrados</p>
+        <br />
+
+        {cadastrados.map((item) => {
+          return (
+            <div style={{ display: "flex"}}>
+              <p>{item.nome} - {item.email}</p>
+              
+              <button onClick={() => {
+                setNome(item.nome);
+                setemail(item.email);
+                setSenha("");
+              }}>alterar</button>
+              
+              <button onClick={() => {
+                const posicao = cadastrados.indexOf(item);
+                cadastrados.splice(posicao, 1);
+                armazenar(cadastrados);
+
+                // busca
+                const retorno = consultar();
+                setCadastrados(retorno);
+              }}>deletar</button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
