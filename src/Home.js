@@ -43,18 +43,20 @@ function Cadastro() {
   const consultar = () => {
     consulta("dados_de_acesso");
   }
-
+  
   const logout = () => {
     // ativar component alert para confirmação depois sair
     navigate("/");
   }
-
+  
   return (
     <div className="TelaInicial">
+      <header>
       <h3> Tela cadastro de usuários</h3>
-
-      <div className="Fomulario">
-
+      <button onClick={logout}>Logout</button>
+      </header>
+     
+      <div className="Formulario">
         <div>
           <input className="nome"
             placeholder="nome"
@@ -73,7 +75,6 @@ function Cadastro() {
           />
         </div>
 
-
         <div>
           <input className="senha"
             placeholder="senha"
@@ -82,15 +83,13 @@ function Cadastro() {
             onChange={(event) => setSenha(event.target.value)}
           />
         </div>
-      </div>
 
-      <button onClick={salvar}>salvar</button>
-      
-      <button onClick={consultar}>consultar</button>
-
-      <div className="Logout">
-        <button onClick={logout}>Logout</button>
+        <button onClick={salvar}>salvar</button>
       </div>
+      <section>
+        <button onClick={consultar}>consultar</button>
+      </section>
+
     </div>
   );
 

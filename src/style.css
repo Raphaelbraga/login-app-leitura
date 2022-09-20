@@ -1,7 +1,6 @@
-* {
+body {
     margin: 0;
     padding: 0;
-  
     font-family: montserrat, sans-serif;
 }
 
@@ -16,17 +15,24 @@
 
 }
 
-.Home {
+.TelaInicial {
+    padding: 1em;
     height: 100vh;
     background: rgba(66, 130, 115, 0.27);
     background: linear-gradient(180deg, rgba(66,125,110,1) 5%, 
         rgba(67,130,115,0.02) 100%);
+ 
+}
+
+header {
+    margin: 1rem 1rem 2rem 1rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
 .Formulario {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,13 +67,10 @@ button {
     background: rgb(180, 19, 244, 0.2);
     border-color: rgb(180, 19, 244, 0.1);
     outline: none;  
+    transition:transform .2s;
 }
-.TelaInicial {
-    height: 100vh;
-    background: rgba(66, 130, 115, 0.27);
-    background: linear-gradient(180deg, rgba(66,125,110,1) 5%, 
-        rgba(67,130,115,0.02) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+button:hover {
+    transform:scale(1.02); 
+    background-color: rgb(180, 19, 244, 0.1);
 }
