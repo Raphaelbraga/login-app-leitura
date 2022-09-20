@@ -4,18 +4,9 @@ import { consultar, armazenar } from "./storage";
 import App from "./App";
 import "./style.css"
 
-//pq diabos a pasta nao renomeia
+
 
 function Home() {
-  return (
-    <Routes>
-      <Route path="/" exact element={<Cadastro />} />
-      <Route path="/App" element={<App />} />
-    </Routes>
-  );
-}
-
-function Cadastro() {
   const navigate = useNavigate();
 
   const [cadastrados, setCadastrados] = useState([]);
@@ -29,23 +20,18 @@ function Cadastro() {
     setCadastrados(retorno);
   }, []);
 
-  const logout = () => {
-    // ativar component alert para confirmação depois sair
-    navigate("/");
-  }
-
   const onSalvar = () => {
     const usuario = {
       nome,
       email,
       senha,
     };
-
     // salva
     armazenar([...cadastrados, usuario]);
+  }
 
-    const consultar = () => {
-      consulta("dados_de_acesso");
+    const consulta = () => {
+      consultar("dados_de_acesso");
     }
 
     const logout = () => {
@@ -93,11 +79,8 @@ function Cadastro() {
 
           <button onClick={onSalvar}>salvar</button>
 
-          <div className="Logout">
-            <button onClick={logout}>Logout</button>
-          </div>
-
-          <div>
+        </div>
+        <div className="mostra-cadastrados">
             <p>Cadastrados</p>
             <br />
 
@@ -125,9 +108,7 @@ function Cadastro() {
               );
             })}
           </div>
-        </div>
       </div>
     );
-  }
 }
 export default Home;
