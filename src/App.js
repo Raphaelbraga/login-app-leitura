@@ -1,7 +1,7 @@
 import { getDefaultNormalizer } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "./Home";
+import Home from "./home";
 import { consultar } from "./storage";
 import "./style.css"
 
@@ -9,7 +9,7 @@ function App() {
   return (
       <Routes>
         <Route path="/" exact element={<Login />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
   );
 }

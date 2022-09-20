@@ -4,6 +4,8 @@ import { consultar, armazenar } from "./storage";
 import App from "./App";
 import "./style.css"
 
+//pq diabos a pasta nao renomeia
+
 function Home() {
   return (
     <Routes>
